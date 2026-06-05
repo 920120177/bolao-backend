@@ -80,8 +80,8 @@ console.log('QR Response keys:', Object.keys(qr));
 return res.json({
   pagamentoId:  cob.txid,
   status:       cob.status,
-  qrCodeBase64: qr.imagemQrcode || qr.qr_code_base64 || qr.imagem || qr.imagemQRcode || null,
-  copiaCola:    qr.qrcode || qr.qr_code || qr.copia_e_cola || null,
+  imagemQrcode: qr.imagemQrcode || null,
+  copiaCola:    qr.qrcode || cob.pixCopiaECola || null,
 });
   } catch (err) {
     console.error('Erro PIX:', err.message);
