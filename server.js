@@ -63,7 +63,7 @@ app.post('/criar-pix', async (req, res) => {
     const token = await getToken();
     const cob = await efiReq('POST', '/v2/cob', {
       calendario: { expiracao: 1800 },
-      devedor: { nome, cpf: '00000000000' },
+      devedor: { nome },
       valor: { original: Number(valor).toFixed(2) },
       chave: EFI_PIX_KEY,
       solicitacaoPagador: 'Arena do Palpite - Bilhete ' + bilheteId,
