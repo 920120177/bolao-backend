@@ -15,8 +15,13 @@ const EFI_CERT_BASE64   = process.env.EFI_CERT;
 const EFI_URL           = 'pix.api.efipay.com.br';
 
 function getAgent() {
-  const pfx = Buffer.from(EFI_CERT_BASE64, 'base64');
-  return new https.Agent({ pfx, passphrase: '' });
+  try {
+    const pfx = Buffer.from(EFI_CERT_BASE64, 'base64');
+    return new https.Agent({ pfx, passphrase: '' });
+  } catch(e) {
+    console.error('Erro ao criar agente:', e.message);
+    return new https.Agent({ rejectUnauthorized: false });
+  }
 }
 
 function efiReq(method, path, body, token) {
