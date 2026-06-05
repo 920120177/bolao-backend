@@ -71,11 +71,11 @@ app.post('/criar-pix', async (req, res) => {
     }, token);
     if (!cob.txid) throw new Error('Erro cob: ' + JSON.stringify(cob));
     const qr = await efiReq('GET', '/v2/loc/' + cob.loc.id + '/qrcode', null, token);
-console.log('QR Response:', JSON.stringify(qr));
+console.log('QR Response keys:', Object.keys(qr));
 return res.json({
   pagamentoId:  cob.txid,
   status:       cob.status,
-  qrCodeBase64: qr.imagemQrcode || qr.qr_code_base64 || qr.imagem || null,
+  qrCodeBase64: qr.imagemQrcode || qr.qr_code_base64 || qr.imagem || qr.imagemQRcode || null,
   copiaCola:    qr.qrcode || qr.qr_code || qr.copia_e_cola || null,
 });
   } catch (err) {
